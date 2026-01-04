@@ -42,6 +42,7 @@ h1 {
     text-transform: uppercase;
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 2.5rem;
 }
@@ -150,14 +151,37 @@ h1 {
 }
 
 /* Number colors */
-.cell[data-value="1"] { color: #81d4fa; }
-.cell[data-value="2"] { color: #a5d6a7; }
-.cell[data-value="3"] { color: #feabc3; }
-.cell[data-value="4"] { color: #e1bee7; }
-.cell[data-value="5"] { color: #ffcc80; }
-.cell[data-value="6"] { color: #9fa8da; }
-.cell[data-value="7"] { color: #bcaaa4; }
-.cell[data-value="8"] { color: #b0bec5; }
+.cell[data-value="1"] {
+    color: #81d4fa;
+}
+
+.cell[data-value="2"] {
+    color: #a5d6a7;
+}
+
+.cell[data-value="3"] {
+    color: #feabc3;
+}
+
+.cell[data-value="4"] {
+    color: #e1bee7;
+}
+
+.cell[data-value="5"] {
+    color: #ffcc80;
+}
+
+.cell[data-value="6"] {
+    color: #9fa8da;
+}
+
+.cell[data-value="7"] {
+    color: #bcaaa4;
+}
+
+.cell[data-value="8"] {
+    color: #b0bec5;
+}
 
 .controls-hint {
     margin-top: 20px;
@@ -168,10 +192,152 @@ h1 {
 }
 
 @keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .cell.revealed span {
     animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Navigation Styles */
+.main-nav {
+    position: absolute;
+    top: 20px;
+    display: flex;
+    gap: 15px;
+    background: var(--surface-color);
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 100;
+}
+
+.main-nav button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.main-nav button:hover {
+    color: var(--text-primary);
+}
+
+.main-nav button.active {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Visibility classes */
+.container {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Todo List Styles */
+.todo-input-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+#todo-input {
+    flex: 1;
+    background: var(--cell-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 18px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#todo-input:focus {
+    border-color: var(--primary-color);
+}
+
+#add-todo-btn {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 0 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+#add-todo-btn:hover {
+    transform: translateY(-2px);
+    background: var(--secondary-color);
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.todo-list li {
+    background: var(--surface-color);
+    margin-bottom: 10px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: popIn 0.3s ease;
+}
+
+.todo-text {
+    flex: 1;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.todo-list li.completed .todo-text {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.delete-todo-btn {
+    background: none;
+    border: none;
+    color: var(--error-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.delete-todo-btn:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }

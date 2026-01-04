@@ -200,4 +200,83 @@ document.addEventListener('DOMContentLoaded', () => {
     resetBtn.addEventListener('click', initGame);
 
     initGame();
+
+    // --- Navigation Logic ---
+    const navMinesweeper = document.getElementById('nav-minesweeper');
+    const navTodo = document.getElementById('nav-todo');
+    const viewMinesweeper = document.getElementById('view-minesweeper');
+    const viewTodo = document.getElementById('view-todo');
+
+    function switchView(view) {
+        if (view === 'minesweeper') {
+            viewMinesweeper.classList.remove('hidden');
+            viewTodo.classList.add('hidden');
+            navMinesweeper.classList.add('active');
+            navTodo.classList.remove('active');
+        } else {
+            viewMinesweeper.classList.add('hidden');
+            viewTodo.classList.remove('hidden');
+            navMinesweeper.classList.remove('active');
+            navTodo.classList.add('active');
+        }
+    }
+
+    navMinesweeper.addEventListener('click', () => switchView('minesweeper'));
+    navTodo.addEventListener('click', () => switchView('todo'));
+
+    // --- Todo List Logic ---
+    const todoInput = document.getElementById('todo-input');
+    const addTodoBtn = document.getElementById('add-todo-btn');
+    const todoList = document.getElementById('todo-list');
+
+    let todos = JSON.parse(localStorage.getItem('minesweeper-todos')) || [];
+
+    function saveTodos() {
+        localStorage.setItem('minesweeper-todos', JSON.stringify(todos));
+    }
+
+    function renderTodos() {
+        todoList.innerHTML = '';
+        todos.forEach((todo, index) => {
+            const li = document.createElement('li');
+            if (todo.completed) li.classList.add('completed');
+
+            li.innerHTML = `
+                <span class="todo-text">${todo.text}</span>
+                <button class="delete-todo-btn" data-index="${index}">×</button>
+            `;
+
+            li.querySelector('.todo-text').addEventListener('click', () => {
+                todos[index].completed = !todos[index].completed;
+                saveTodos();
+                renderTodos();
+            });
+
+            li.querySelector('.delete-todo-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                todos.splice(index, 1);
+                saveTodos();
+                renderTodos();
+            });
+
+            todoList.appendChild(li);
+        });
+    }
+
+    function addTodo() {
+        const text = todoInput.value.trim();
+        if (text) {
+            todos.push({ text, completed: false });
+            todoInput.value = '';
+            saveTodos();
+            renderTodos();
+        }
+    }
+
+    addTodoBtn.addEventListener('click', addTodo);
+    todoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') addTodo();
+    });
+
+    renderTodos();
 });

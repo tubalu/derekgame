@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,26 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
+    <nav class="main-nav">
+        <button id="nav-minesweeper" class="active">MINESWEEPER</button>
+        <button id="nav-todo">TODO LIST</button>
+    </nav>
+
+    <div class="container" id="view-minesweeper">
         <h1>Minesweeper</h1>
-        
+
         <div class="game-header">
             <div class="stat-box">
                 <span class="label">MINES</span>
                 <span id="mine-count" class="value">010</span>
             </div>
-            
+
             <button id="reset-btn" class="reset-btn">
                 <span class="icon">↻</span>
             </button>
-            
+
             <div class="stat-box">
                 <span class="label">TIME</span>
                 <span id="timer" class="value">000</span>
@@ -29,13 +36,25 @@
         </div>
 
         <div id="game-board" class="game-board"></div>
-        
+
         <div class="controls-hint">
             <span>Left Click: Reveal</span>
             <span>Right Click: Flag</span>
         </div>
     </div>
 
+    <div class="container hidden" id="view-todo">
+        <h1>Todo List</h1>
+
+        <div class="todo-input-container">
+            <input type="text" id="todo-input" placeholder="What needs to be done?">
+            <button id="add-todo-btn">ADD</button>
+        </div>
+
+        <ul id="todo-list" class="todo-list"></ul>
+    </div>
+
     <script src="game.js"></script>
 </body>
+
 </html>
