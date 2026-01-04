@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <meta name="description" content="A modern, premium Minesweeper game built with Node.js.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Minesweeper</h1>
+        
+        <div class="game-header">
+            <div class="stat-box">
+                <span class="label">MINES</span>
+                <span id="mine-count" class="value">010</span>
+            </div>
+            
+            <button id="reset-btn" class="reset-btn">
+                <span class="icon">↻</span>
+            </button>
+            
+            <div class="stat-box">
+                <span class="label">TIME</span>
+                <span id="timer" class="value">000</span>
+            </div>
+        </div>
+
+        <div id="game-board" class="game-board"></div>
+        
+        <div class="controls-hint">
+            <span>Left Click: Reveal</span>
+            <span>Right Click: Flag</span>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

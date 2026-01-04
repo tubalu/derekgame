@@ -1,0 +1,177 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #bb86fc;
+    --secondary-color: #03dac6;
+    --error-color: #cf6679;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --cell-bg: #2d2d2d;
+    --cell-hover: #3d3d3d;
+    --cell-revealed: #252525;
+    --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-strong: 0 10px 20px rgba(0, 0, 0, 0.3);
+    --font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    background: var(--surface-color);
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.reset-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--cell-bg);
+}
+
+.reset-btn:hover {
+    transform: rotate(180deg) scale(1.1);
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    background: var(--surface-color);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-strong);
+    user-select: none;
+}
+
+.cell {
+    width: 35px;
+    height: 35px;
+    background-color: var(--cell-bg);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 1.1rem;
+}
+
+.cell:hover:not(.revealed) {
+    background-color: var(--cell-hover);
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.cell.revealed {
+    background-color: var(--cell-revealed);
+    cursor: default;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.cell.mine {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.cell.flag::before {
+    content: "🚩";
+    font-size: 1rem;
+}
+
+/* Number colors */
+.cell[data-value="1"] { color: #81d4fa; }
+.cell[data-value="2"] { color: #a5d6a7; }
+.cell[data-value="3"] { color: #feabc3; }
+.cell[data-value="4"] { color: #e1bee7; }
+.cell[data-value="5"] { color: #ffcc80; }
+.cell[data-value="6"] { color: #9fa8da; }
+.cell[data-value="7"] { color: #bcaaa4; }
+.cell[data-value="8"] { color: #b0bec5; }
+
+.controls-hint {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cell.revealed span {
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
