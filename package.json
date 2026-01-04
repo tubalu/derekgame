@@ -2,14 +2,19 @@
   "name": "minesweeper-node",
   "version": "1.0.0",
   "description": "A modern Minesweeper game built with Node.js",
-  "main": "server.js",
+  "source": "public/index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "parcel public/index.html",
+    "build": "parcel build public/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.3"
   }
 }
